@@ -18,6 +18,7 @@ public class UserController {
     //http://localhost:8080/api/users/getAllUser
     @GetMapping("/getAllUser")
     public List<User>getAllUsers(){
+
         return this.userServices.getAllUser();
     }
     //retrun single user
@@ -31,6 +32,7 @@ public class UserController {
     //http://localhost:8080/api/users/add
     @PostMapping("/add")
     public User add(@RequestBody User user){
+
         return this.userServices.addUser(user);
     }
 
