@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -19,11 +20,13 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.csrf().disable()
+                //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+                .authorizeRequests()
                 //.antMatchers("/home","/login","/register").permitAll()
                 // .antMatchers(HttpMethod.GET,"/public/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/public/**").hasRole("NORMAL")
-                .antMatchers(HttpMethod.GET, "/api/users/**").hasRole("ADMIN")
+                .antMatchers( "/api/users/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -33,9 +36,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("john")
+                .withUser("user")
                 //.password("don")
-                .password(this.passwordEncoder().encode("don"))
+                .password(this.passwordEncoder().encode("user123"))
                 .roles("NORMAL");
         auth.inMemoryAuthentication()
                 .withUser("admin")
