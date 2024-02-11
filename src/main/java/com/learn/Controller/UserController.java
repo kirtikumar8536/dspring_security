@@ -3,6 +3,7 @@ package com.learn.Controller;
 import com.learn.Entity.User;
 import com.learn.Services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,9 +31,10 @@ public class UserController {
     }
 
     //http://localhost:8080/api/users/add
+
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public User add(@RequestBody User user){
-
         return this.userServices.addUser(user);
     }
 

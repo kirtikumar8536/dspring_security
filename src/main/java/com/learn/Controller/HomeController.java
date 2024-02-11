@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/public")
 public class HomeController {
     //suppose i dont want to secure this end point so we'll use antmatcher in config
+
+    //http://localhost:8080/public/home
     @GetMapping("/home")
     public String home() {
         return "Home sweet home spring";
