@@ -1,9 +1,17 @@
 package com.learn.Entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
+    @Id
+    Long id;
     String username;
     String password;
     String email;
+    String role;//admin ,normal,user
+
     public User() {
     }
 
@@ -11,6 +19,14 @@ public class User {
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public User(Long id, String username, String password, String email, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -35,5 +51,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
